@@ -1,1 +1,1 @@
-contain all files of backend development of AIS
+contain all files of frontend development of AIS
