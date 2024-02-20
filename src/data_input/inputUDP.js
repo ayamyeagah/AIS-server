@@ -1,18 +1,23 @@
 const dgram = require('node:dgram');
 const server = dgram.createSocket('udp4');
 
+// for handle error
 server.on('error', (err) => {
     console.error(`server error:\n${err.stack}`);
     server.close();
 });
 
-server.on('message', (msg, rinfo) => {
-    console.log(`server got: ${msg} from ${rinfo.address}:${rinfo.port}`);
+// read AIS data
+server.on('message', (msg) => {
+    console.log(`${msg}`);
 });
 
+// listen UDP port & ip
 server.on('listening', () => {
     const address = server.address();
-    console.log(`server listening ${address.address}:${address.port}`);
 });
 
-server.bind(2024, '127.0.0.1');
+// UDP network available:
+// port : 1001;9921;
+// host : 103.24.49.246
+server.bind(1001, '103.24.49.246');

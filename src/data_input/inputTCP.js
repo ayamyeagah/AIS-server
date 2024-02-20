@@ -1,11 +1,25 @@
-const net = require('node:net');
+const net = require('net');
+// available port & host
+// port = 6677
+// host = '127.0.0.4'
+const port = 6677;
+const host = '127.0.0.4';
 
-const server = net.createServer((socket) => {
-  socket.on('data', (data) => {
-    console.log('Received data from client:', data.toString());
-  });
+// server start & listening
+const server = net.createServer();
+server.listen(port, host, () => {
+  console.log(`Server listening on ${host}:${port}`);
 });
 
-server.listen(3000, () => {
-  console.log('Server listening on port 3000');
+let sockets = [];
+
+server.on('connection', function(sock) {
+  // ensure if connected to host & port
+  console.log(`CONNECTED: ${sock.remoteAddress}:${sock.remotePort}`);
+  sockets.push(sock);
+  
+  // read data
+  sock.on('data', function(data) {
+    console.log(`${data}`);
+  });
 });
