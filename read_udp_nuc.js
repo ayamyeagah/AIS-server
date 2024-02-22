@@ -1,5 +1,13 @@
-const dgram = require('node:dgram');
+const dgram = require('dgram');
 const server = dgram.createSocket('udp4');
+
+/*
+UDP network available:
+port : 1001;9921;
+host : 103.24.49.246
+*/
+const port = 1001;
+const host = '103.24.46.246';
 
 // for handle error
 server.on('error', (err) => {
@@ -17,7 +25,4 @@ server.on('listening', () => {
     const address = server.address();
 });
 
-// UDP network available:
-// port : 1001;9921;
-// host : 103.24.49.246
-server.bind(1001, '103.24.49.246');
+server.bind(port, host);

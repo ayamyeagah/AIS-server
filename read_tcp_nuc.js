@@ -1,7 +1,11 @@
 const net = require('net');
-// available port & host
-// port = 6677
-// host = '127.0.0.4'
+
+/*
+available port & host
+- NUC Server 2
+    port = 6677
+    host = '127.0.0.4'
+*/
 const port = 6677;
 const host = '127.0.0.4';
 
