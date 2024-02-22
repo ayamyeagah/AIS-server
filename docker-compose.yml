@@ -1,0 +1,9 @@
+version: "2.24.6"
+
+services:
+  input-ais:
+    container_name: input-ais
+    image: data_input:1.0
+    ports: 
+      - 8080:8080
+
