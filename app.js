@@ -30,7 +30,7 @@ app.get('/products/:id', async(req, res) => {
 
 app.post('/products', async(req, res) => {
     try {
-        const {nmea} = req.body();
+        const {nmea} = req.body;
         const product = new Product({nmea});
         await product .save();
         res.json({success: true});
