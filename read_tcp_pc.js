@@ -11,7 +11,7 @@ IP PUBLIC AIS
 const net = require('net');
 const HOST = '103.167.35.10';
 const PORT = 2567;
-
+ 
 const sock = new net.Socket();
 
 sock.connect(PORT, HOST, () => {
