@@ -19,7 +19,8 @@ sock.connect(PORT, HOST, () => {
 });
 
 sock.on('data', (data) => {
-  console.log(data.toString());
+  // console.log(data.toString());
+  console.log(data);
 });
 
 // sock.on('data', async (data) => {
