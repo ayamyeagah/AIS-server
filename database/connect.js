@@ -10,12 +10,9 @@ const client = new MongoClient(URI);
 // Function to connect to MongoDB
 async function connectDB() {
     try {
-        // await client.connect(URI, {
-        // useNewUrlParser: true,
-        // useUnifiedTopology: true,
-        // });
         await client.connect();
         const db = await client.db(DB_NAME)
+        console.log('Connected to DB')
         return client.db(); // Return the database object
     } catch (err) {
         console.error('Database connection error:', err);

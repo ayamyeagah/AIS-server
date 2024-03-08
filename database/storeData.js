@@ -6,10 +6,10 @@ async function storeInDB(decodedMessage) {
         const db = await connectDB();
         if (!db) return;
 
-        const collection = db.collection('rawdata'); // Specify your collection name
+        const collection = db.collection('rawdata'); // Specify collection name
         const messageObject = { message: decodedMessage };
         await collection.insertOne(messageObject);
-        // console.log('Message stored in MongoDB:', decodedMessage);
+        console.log('Stored: ', decodedMessage);
     } catch (err) {
         console.error('Error storing message in MongoDB:', err);
     }
