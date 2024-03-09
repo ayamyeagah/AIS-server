@@ -4,14 +4,17 @@ const connectDB = require('./connect');
 async function storeInDB(decodedMessage) {
     try {
         const db = await connectDB();
-        if (!db) return;
+        if (!db) {
+            console.error('Database connection is not established.');
+            return;
+        }
 
-        const collection = db.collection('rawdata'); // Specify collection name
+        const collection = db.collection('rawdata');
         const messageObject = { message: decodedMessage };
         await collection.insertOne(messageObject);
-        console.log('Stored: ', decodedMessage);
-    } catch (err) {
-        console.error('Error storing message in MongoDB:', err);
+        console.log('Stored:', decodedMessage);
+    } catch (error) {
+        console.error('Error storing message in MongoDB:', error);
     }
 }
 

@@ -5,17 +5,20 @@ const { MongoClient } = require('mongodb');
 const URI = 'mongodb+srv://ayamyeagah:Kubeb1012@cluster0.fmes5hv.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
 const DB_NAME = 'AIS';
 
-const client = new MongoClient(URI);
+let db = null;
 
 // Function to connect to MongoDB
 async function connectDB() {
     try {
-        await client.connect();
-        const db = await client.db(DB_NAME)
-        console.log('Connected to DB')
-        return client.db(); // Return the database object
-    } catch (err) {
-        console.error('Database connection error:', err);
+        if (!db) {
+            const client = new MongoClient(URI, { useNewUrlParser: true, useUnifiedTopology: true });
+            await client.connect();
+            console.log('Connected to MongoDB');
+            db = client.db(DB_NAME);
+        }
+        return db;
+    } catch (error) {
+        console.error('Database connection error:', error);
         return null;
     }
 }
