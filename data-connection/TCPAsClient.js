@@ -10,11 +10,6 @@ function connectToTCPServer(port, host, onDataReceived) {
         console.log('Connected to TCP server');
     });
 
-    // Event handler for incoming data from TCP server
-    // clientSocket.on('data', data => {
-    //     onDataReceived(data.toString());
-    // });
-    
     // Pipe the TCP client stream through the split transform
     clientSocket
         .pipe(split())

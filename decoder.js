@@ -24,7 +24,7 @@ class NMEADecoder {
 
     // Method to handle decoded AIS message
     handleDecodedMessage(decodedMessage) {
-        // decoded AIS message stored to database
+        // Decoded AIS message stored to database
         storeInDB(decodedMessage);
     }
 }

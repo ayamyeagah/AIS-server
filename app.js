@@ -16,10 +16,6 @@ connectDB()
             connectToTCPServer(PORT, HOST, nmea => {
                 // Write the NMEA AIS message to the decoder
                 nmeaDecoder.write(nmea);
-                // storeInDB(nmeaDecoder.handleDecodedMessage(decodedMessage));
-                // Store the decoded message in MongoDB (if required)
-                // Example: db.collection('ais_messages').insertOne(decodedMessage);
-                // console.log(nmea);
             });
         } else {
             console.error('Failed to connect to MongoDB');
