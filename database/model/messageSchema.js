@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
-const messageSchema = new mongoose.Schema ({
+// Define the schema for decoded messages
+const messageSchema = new mongoose.Schema({
     type: Number,
     channel: String,
     repeat: Number,
@@ -13,11 +14,12 @@ const messageSchema = new mongoose.Schema ({
     lat: Number,
     courseOverGround: Number,
     heading: Number,
-    utcSecond: Number,
-    specialManoeuver: Number,
+    utcSecond: Date,
+    specialManoeuvre: Number,
     raim: Boolean,
     radio: Number,
-    sentences: Array
+    sentences: [String]
 });
+const MessageSchema = mongoose.model('rawdata', messageSchema, 'rawdata');
 
-module.exports = mongoose.model('Message', messageSchema);
+module.exports = MessageSchema;
