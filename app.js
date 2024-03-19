@@ -3,8 +3,8 @@ const connectToTCPServer = require('./data-connection/TCPAsClient');
 const NMEADecoder = require('./decoder');
 
 // TCP server configuration
-const PORT = 2567;
-const HOST = '103.167.35.10'
+const PORT = 34567;
+const HOST = '103.24.49.246'
 
 const nmeaDecoder = new NMEADecoder();
 
