@@ -1,10 +1,11 @@
 const connectDB = require('./database/connect');
 const connectToTCPServer = require('./data-connection/TCPAsClient');
 const NMEADecoder = require('./decoder');
+const config = require('./config');
 
 // TCP server configuration
-const PORT = 34567;
-const HOST = '103.24.49.246'
+const PORT = config.tcp.port;
+const HOST = config.tcp.host;
 
 const nmeaDecoder = new NMEADecoder();
 

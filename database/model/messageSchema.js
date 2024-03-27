@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const config = require('../../config');
 
 // Define the schema for decoded messages
 const messageSchema = new mongoose.Schema({
@@ -20,6 +21,10 @@ const messageSchema = new mongoose.Schema({
     radio: Number,
     sentences: [String]
 });
-const MessageSchema = mongoose.model('rawdata', messageSchema, 'rawdata');
+const MessageSchema = mongoose.model (
+    config.mongoose.collection, 
+    messageSchema, 
+    config.mongoose.collection
+    );
 
 module.exports = MessageSchema;

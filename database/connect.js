@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
+const config = require('../config');
 
 // MongoDB connection URI
-const URI = 'mongodb+srv://ayamyeagah:Kubeb1012@cluster0.fmes5hv.mongodb.net/AIS';
+const URI = config.mongoose.uri;
 
 let db = null;
 
