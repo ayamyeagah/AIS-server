@@ -1,28 +1,16 @@
-#!/usr/bin/env node
+const express = require('express');
+const bodyParser = require('body-parser');
+const app = express();
+const Producer = require('./tcpPublisher');
+const producer = new Producer();
 
-var amqp = require('amqplib/callback_api');
+app.use(bodyParser.json('application/json'));
 
-amqp.connect('amqp://localhost', function(error0, connection) {
-    if (error0) {
-        throw error0;
-    }
-    connection.createChannel(function(error1, channel) {
-        if (error1) {
-            throw error1;
-        }
+app.post('/sendMsg', async (req, res, next)=> {
+    await producer.publishMsg(req.body.logType, req.body.message);
+    res.send();
+});
 
-        var queue = 'hello';
-
-        channel.assertQueue(queue, {
-            durable: false
-        });
-
-        console.log(" [*] Waiting for messages in %s. To exit press CTRL+C", queue);
-
-        channel.consume(queue, function(msg) {
-            console.log(" [x] Received %s", msg.content.toString());
-        }, {
-            noAck: true
-        });
-    });
+app.listen(3000, () => {
+    console.log('Server started...')
 });

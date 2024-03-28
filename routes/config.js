@@ -7,5 +7,10 @@ module.exports = {
     tcp : {
         host : '103.24.49.246',
         port : 34567
+    },
+    
+    rabbitMQ : {
+        uri : 'amqp://localhost',
+        exchange : 'dataExchange'
     }
 }
