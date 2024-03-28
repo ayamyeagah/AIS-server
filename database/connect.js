@@ -1,19 +1,18 @@
-const { MongoClient } = require('mongodb');
+const mongoose = require('mongoose');
+const config = require('../config');
 
 // MongoDB connection URI
-const URI = 'mongodb+srv://ayamyeagah:Kubeb1012@cluster0.fmes5hv.mongodb.net/';
-const DB_NAME = 'AIS';
+const URI = config.mongoose.uri;
 
 let db = null;
 
 // Function to connect to MongoDB
 async function connectDB() {
     try {
-        if (!db) {
-            const client = new MongoClient(URI, { useNewUrlParser: true, useUnifiedTopology: true });
-            await client.connect();
+        if(!db) {
+            await mongoose.connect(URI);
             console.log('Connected to MongoDB');
-            db = client.db(DB_NAME);
+            db = mongoose.connection
         }
         return db;
     } catch (error) {

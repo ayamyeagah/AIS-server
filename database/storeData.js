@@ -1,4 +1,5 @@
 const connectDB = require('./connect');
+const MessageSchema = require('./model/messageSchema')
 
 // Function to store decoded message in MongoDB
 async function storeInDB(decodedMessage) {
@@ -9,9 +10,8 @@ async function storeInDB(decodedMessage) {
             return;
         }
 
-        const collection = db.collection('rawdata');
-        const messageObject = { message: decodedMessage };
-        await collection.insertOne(messageObject);
+        const messageObject = new MessageSchema(decodedMessage);
+        await messageObject.save();
         console.log('Stored:', decodedMessage);
     } catch (error) {
         console.error('Error storing message in MongoDB:', error);

@@ -25,7 +25,8 @@ class NMEADecoder {
     // Method to handle decoded AIS message
     handleDecodedMessage(decodedMessage) {
         // Decoded AIS message stored to database
-        storeInDB(decodedMessage);
+        const decodedResult = JSON.parse(decodedMessage)
+        storeInDB(decodedResult);
     }
 }
 
