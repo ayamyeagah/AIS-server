@@ -1,4 +1,4 @@
-const connectDB = require('./connect');
+const connectDB = require('./connectDB');
 const MessageSchema = require('./model/messageSchema')
 
 // Function to store decoded message in MongoDB

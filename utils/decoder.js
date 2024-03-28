@@ -1,5 +1,5 @@
 const AisDecoder = require('ais-stream-decoder');
-const storeInDB = require('./database/storeData');
+const storeInDB = require('../database/storeDB');
 
 class NMEADecoder {
     constructor(options = {}) {

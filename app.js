@@ -1,5 +1,5 @@
-const connectDB = require('./database/connect');
-const connectToTCPServer = require('./data-connection/TCPAsClient');
+const connectDB = require('./database/connectDB');
+const connectToTCPServer = require('./services/datastream');
 const NMEADecoder = require('./decoder');
 const config = require('./config');
 
