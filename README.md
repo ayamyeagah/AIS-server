@@ -4,7 +4,7 @@ Repository of AIS Server in Communication & Navigation Laboratorium Shipbuilding
 - [DONE] TCP connection for datastream
 - [DONE] Decoding AIS Message
 - [DONE] Store in MongoDB Database
-- [IN PROGRESS] Create Schema and Model for Decoded Message using Mongoose
+- [DONE] Create Schema and Model for Decoded Message using Mongoose
 - [IN PROGRESS] Build Microservices for Hardware, Datastream, & Database
 - [NOT STARTED] Build Docker for Project Environment
 - [NOT STARTED] Create REST API
