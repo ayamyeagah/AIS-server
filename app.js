@@ -1,5 +1,5 @@
 const connectDB = require('./database/connectDB');
-const connectToTCPServer = require('./services/datastream');
+const connectTCP = require('./services/datastream');
 const NMEADecoder = require('./decoder');
 const config = require('./config');
 
@@ -14,7 +14,7 @@ connectDB()
     .then(db => {
         if (db) {
             // Start TCP server
-            connectToTCPServer(PORT, HOST, nmea => {
+            connectTCP(PORT, HOST, nmea => {
                 // Write the NMEA AIS message to the decoder
                 nmeaDecoder.write(nmea);
             });

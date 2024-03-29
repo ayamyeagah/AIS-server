@@ -2,7 +2,7 @@ const net = require('net');
 const split = require('split');
 
 // Function to connect to TCP server using a socket
-function connectToTCPServer(port, host, onDataReceived) {
+function connectTCP(port, host, onDataReceived) {
     const clientSocket = new net.Socket();
 
     // Connect to the TCP server
@@ -31,4 +31,4 @@ function connectToTCPServer(port, host, onDataReceived) {
     return clientSocket;
 }
 
-module.exports = connectToTCPServer;
+module.exports = connectTCP;
