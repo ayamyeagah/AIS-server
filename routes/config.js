@@ -11,6 +11,8 @@ module.exports = {
     
     rabbitMQ : {
         uri : 'amqp://localhost',
-        exchange : 'dataExchange'
+        exchange : 'dataExchange',
+        infoQueue: 'InfoQueue',
+        infoBindKey: 'Info'
     }
 }

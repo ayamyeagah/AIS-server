@@ -1,6 +1,11 @@
 const amqp = require('amqplib');
 const config = require('../routes/config');
 
+// 1. Connect to RabbitMQ server
+// 2. Create a new channel on that connection
+// 3. Create the exchange
+// 4. Publish the message to the exchange with a routing key
+
 class Producer {
     channel;
 

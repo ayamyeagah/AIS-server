@@ -1,16 +1,32 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const app = express();
-const Producer = require('./tcpPublisher');
-const producer = new Producer();
+const amqp = require('amqplib');
+const config = require('../routes/config');
 
-app.use(bodyParser.json('application/json'));
+// 1. Connect to RabbitMQ server
+// 2. Create a new channel
+// 3. Create the exchange
+// 4. Create the queue
+// 5. Bind the queue to the exchange
+// 6. Consume message from the queue
 
-app.post('/sendMsg', async (req, res, next)=> {
-    await producer.publishMsg(req.body.logType, req.body.message);
-    res.send();
-});
+async function consumeMsg() {
+    const conn = await amqp.connect(config.rabbitMQ.uri);
+    const channel = await conn.createChannel();
 
-app.listen(3000, () => {
-    console.log('Server started...')
-});
+    const exchangeName = config.rabbitMQ.exchange;
+    const queueName = config.rabbitMQ.infoQueue;
+    const bindKeyName = config.rabbitMQ.infoBindKey;
+    
+    await channel.assertExchange(exchangeName, 'direct');
+
+    const q = await channel.assertQueue(queueName);
+
+    await channel.bindQueue(q.queue, exchangeName, bindKeyName);
+
+    channel.consume(q.queue, (msg) => {
+        const data = JSON.parse(msg.content);
+        console.log(data);
+        channel.ack(msg);
+    });
+}
+
+consumeMsg();
