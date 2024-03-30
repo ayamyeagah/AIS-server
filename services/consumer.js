@@ -1,5 +1,7 @@
 const amqp = require('amqplib');
 const config = require('../routes/config');
+const NMEADecoder = require('../utils/decoder');
+const nmeaDecoder = new NMEADecoder();
 
 // 1. Connect to RabbitMQ server
 // 2. Create a new channel
@@ -14,17 +16,16 @@ async function consumeMsg() {
 
     const exchangeName = config.rabbitMQ.exchange;
     const queueName = config.rabbitMQ.infoQueue;
-    const bindKeyName = config.rabbitMQ.infoBindKey;
     
     await channel.assertExchange(exchangeName, 'direct');
 
     const q = await channel.assertQueue(queueName);
 
-    await channel.bindQueue(q.queue, exchangeName, bindKeyName);
+    await channel.bindQueue(q.queue, exchangeName, 'nmea');
 
     channel.consume(q.queue, (msg) => {
         const data = JSON.parse(msg.content);
-        console.log(data);
+        nmeaDecoder.write(data.message);
         channel.ack(msg);
     });
 }

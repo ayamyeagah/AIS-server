@@ -23,9 +23,8 @@ class Producer {
         await this.channel.assertExchange(exchangeName, 'direct');
         
         const msg = {
-            logType: config.rabbitMQ.infoBindKey,
-            message: message,
-            dateTime: new Date()
+            type: config.rabbitMQ.routingKey,
+            message: message
         };
 
         await this.channel.publish(

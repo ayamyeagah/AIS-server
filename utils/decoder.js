@@ -1,5 +1,5 @@
 const AisDecoder = require('ais-stream-decoder');
-const storeInDB = require('../database/storeDB');
+// const storeInDB = require('../database/storeDB');
 
 class NMEADecoder {
     constructor(options = {}) {
@@ -26,7 +26,8 @@ class NMEADecoder {
     handleDecodedMessage(decodedMessage) {
         // Decoded AIS message stored to database
         const decodedResult = JSON.parse(decodedMessage)
-        storeInDB(decodedResult);
+        // storeInDB(decodedResult);
+        console.log(decodedResult);
     }
 }
 

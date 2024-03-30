@@ -11,9 +11,8 @@ module.exports = {
     
     rabbitMQ : {
         uri : 'amqp://localhost',
-        routingKey: 'rawAIS',
+        routingKey: 'nmea',
         exchange : 'dataExchange',
         infoQueue: 'rawQueue',
-        infoBindKey: 'nmea'
     }
 }

@@ -16,7 +16,7 @@
 // });
 
 const config = require('../routes/config');
-const connectTCP = require('./datastream');
+const connectTCP = require('../utils/datastream');
 const Producer = require('./producer');
 const producer = new Producer();
 
@@ -26,3 +26,5 @@ const PORT = config.tcp.port;
 connectTCP(PORT, HOST, data => {
     producer.publishMsg(config.rabbitMQ.routingKey, data);
 });
+
+// data from hardware that forwarding to services define here
