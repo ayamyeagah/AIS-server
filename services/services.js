@@ -16,14 +16,14 @@
 // });
 
 const config = require('../routes/config');
-const connectTCP = require('../utils/datastream');
+const tcpDataConn = require('../utils/datastream');
 const Producer = require('./producer');
 const producer = new Producer();
 
 const HOST = config.tcp.host;
 const PORT = config.tcp.port;
 
-connectTCP(PORT, HOST, data => {
+tcpDataConn(PORT, HOST, data => {
     producer.publishMsg(config.rabbitMQ.routingKey, data);
 });
 

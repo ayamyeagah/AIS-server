@@ -14,5 +14,9 @@ module.exports = {
         routingKey: 'nmea',
         exchange : 'dataExchange',
         infoQueue: 'rawQueue',
+    },
+
+    app : {
+        port : 3000
     }
 }
