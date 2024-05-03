@@ -1,7 +1,6 @@
 module.exports = {
     mongoose : {
-        uri : 'mongodb+srv://ayamyeagah:Kubeb1012@cluster0.fmes5hv.mongodb.net/AIS',
-        collection : 'rawdata'
+        uri : 'mongodb+srv://ayamyeagah:Kubeb1012@service-ais-db.kzhk0wn.mongodb.net/raw?retryWrites=true&w=majority&appName=service-ais-db'
     },
 
     tcp : {

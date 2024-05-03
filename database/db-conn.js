@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const config = require('../config');
+const config = require('../routes/config');
 
 // MongoDB connection URI
 const URI = config.mongoose.uri;

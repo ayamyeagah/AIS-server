@@ -1,6 +1,6 @@
 const amqp = require('amqplib');
 const config = require('../routes/config');
-const NMEADecoder = require('../utils/decoder');
+const NMEADecoder = require('../utils/decoder-service');
 const nmeaDecoder = new NMEADecoder();
 
 // 1. Connect to RabbitMQ server
@@ -30,4 +30,4 @@ async function consumeMsg() {
     });
 }
 
-consumeMsg();
+consumeMsg().catch(console.error);

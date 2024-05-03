@@ -16,7 +16,7 @@
 // });
 
 const config = require('../routes/config');
-const tcpDataConn = require('../utils/datastream');
+const tcpDataConn = require('../utils/tcp-service');
 const Producer = require('./producer');
 const producer = new Producer();
 

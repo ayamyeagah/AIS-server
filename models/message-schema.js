@@ -4,7 +4,7 @@ const config = require('../routes/config');
 // Define the schema for decoded messages
 const messageSchema = new mongoose.Schema(
     {
-        type: Number,
+        type: Number, 
         channel: String,
         repeat: Number,
         mmsi: Number,
