@@ -1,3 +1,7 @@
+/* utils for handling AIS data over socket connection as a client
+will be migrate to mqtt. soon.
+*/
+
 const net = require('net');
 const split = require('split');
 

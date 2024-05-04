@@ -1,3 +1,6 @@
+/* script for starting message queueing protocol
+*/
+
 // const express = require('express');
 // const bodyParser = require('body-parser');
 // const app = express();

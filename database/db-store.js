@@ -1,3 +1,7 @@
+/* function for stored data into database
+migrate to specific rules define in schema. very soon.
+*/
+
 const connectDB = require('./connectDB');
 const MessageSchema = require('../models/message-schema');
 

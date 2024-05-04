@@ -1,3 +1,6 @@
+/* main application
+*/
+
 const config = require('./routes/config')
 const routes = require('./routes/routes');
 const bodyParser = require('body-parser');

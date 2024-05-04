@@ -1,0 +1,2 @@
+/* schema for stored all message received
+*/

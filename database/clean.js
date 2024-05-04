@@ -1,3 +1,7 @@
+/* for test only
+migrate to specific rules, very soon.
+*/
+
 const consumeMsg = require('../services/consumer');
 
 async function clean() {

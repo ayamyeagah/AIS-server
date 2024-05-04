@@ -1,3 +1,6 @@
+/* class for create producer in message queueing
+*/
+
 const amqp = require('amqplib');
 const config = require('../routes/config');
 

@@ -1,3 +1,5 @@
+// schema for reference
+
 const mongoose = require('mongoose');
 const config = require('../routes/config');
 

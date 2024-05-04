@@ -1,3 +1,6 @@
+/* function for consuming incoming data from queue
+*/
+
 const config = require('../routes/config');
 const amqp = require('amqplib');
 const EventEmiiter = require('events');

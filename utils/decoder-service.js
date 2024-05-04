@@ -1,3 +1,6 @@
+/*  utils for handling decode data from nmea format to ais messages
+*/
+
 const AisDecoder = require('ais-stream-decoder');
 const EventEmitter = require('events');
 // const storeInDB = require('../database/storeDB');

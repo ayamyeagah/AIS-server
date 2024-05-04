@@ -1,3 +1,6 @@
+/* API routes (get, post, update, delete)
+*/
+
 const express = require('express');
 const router = express.Router();
 

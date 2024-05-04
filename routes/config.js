@@ -1,3 +1,7 @@
+/* for config environment
+migrate to .env, very soon.
+*/
+
 module.exports = {
     mongoose : {
         uri : 'mongodb+srv://ayamyeagah:Kubeb1012@service-ais-db.kzhk0wn.mongodb.net/raw?retryWrites=true&w=majority&appName=service-ais-db'
