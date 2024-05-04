@@ -1,14 +1,17 @@
 const AisDecoder = require('ais-stream-decoder');
+const EventEmitter = require('events');
 // const storeInDB = require('../database/storeDB');
 
-class NMEADecoder {
+class NMEADecoder extends EventEmitter {
     constructor(options = {}) {
+        super();
         // Create an instance of the AIS decoder
         this.aisDecoder = new AisDecoder.default({ silent: options.silent || true });
 
         // Event handler for errors
         this.aisDecoder.on('error', err => {
             console.error(err);
+            this.emit('error', err);
         });
 
         // Event handler for decoded AIS messages
@@ -25,9 +28,10 @@ class NMEADecoder {
     // Method to handle decoded AIS message
     handleDecodedMessage(decodedMessage) {
         // Decoded AIS message stored to database
-        const decodedResult = JSON.parse(decodedMessage)
+        const aisMsg = JSON.parse(decodedMessage)
         // storeInDB(decodedResult);
-        console.log(decodedResult);
+        // console.log(decodedResult);
+        this.emit('decoded', aisMsg);
     }
 }
 

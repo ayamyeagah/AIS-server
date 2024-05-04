@@ -1,5 +1,6 @@
-const amqp = require('amqplib');
 const config = require('../routes/config');
+const amqp = require('amqplib');
+const EventEmiiter = require('events');
 const NMEADecoder = require('../utils/decoder-service');
 const nmeaDecoder = new NMEADecoder();
 
@@ -11,6 +12,7 @@ const nmeaDecoder = new NMEADecoder();
 // 6. Consume message from the queue
 
 async function consumeMsg() {
+    const emitter = new EventEmiiter();
     const conn = await amqp.connect(config.rabbitMQ.uri);
     const channel = await conn.createChannel();
 
@@ -25,9 +27,17 @@ async function consumeMsg() {
 
     channel.consume(q.queue, (msg) => {
         const data = JSON.parse(msg.content);
+        
         nmeaDecoder.write(data.message);
+        nmeaDecoder.on('decoded', aisMsg => {
+            emitter.emit('data', aisMsg);
+        });
+
         channel.ack(msg);
     });
+
+    return emitter;
 }
 
-consumeMsg().catch(console.error);
+// consumeMsg().catch(console.error);
+module.exports = consumeMsg;
