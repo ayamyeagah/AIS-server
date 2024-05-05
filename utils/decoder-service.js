@@ -8,6 +8,7 @@ const EventEmitter = require('events');
 class NMEADecoder extends EventEmitter {
     constructor(options = {}) {
         super();
+
         // Create an instance of the AIS decoder
         this.aisDecoder = new AisDecoder.default({ silent: options.silent || true });
 

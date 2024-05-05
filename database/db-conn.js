@@ -2,7 +2,7 @@
 */
 
 const mongoose = require('mongoose');
-const config = require('../routes/config');
+const config = require('../config/config');
 
 // MongoDB connection URI
 const URI = config.mongoose.uri;
@@ -12,7 +12,7 @@ let db = null;
 // Function to connect to MongoDB
 async function connectDB() {
     try {
-        if(!db) {
+        if (!db) {
             await mongoose.connect(URI);
             console.log('Connected to MongoDB');
             db = mongoose.connection
