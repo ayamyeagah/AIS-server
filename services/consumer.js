@@ -1,7 +1,7 @@
 /* function for consuming incoming data from queue
 */
 
-const config = require('../routes/config');
+const config = require('../config/config');
 const amqp = require('amqplib');
 const EventEmiiter = require('events');
 const NMEADecoder = require('../utils/decoder-service');

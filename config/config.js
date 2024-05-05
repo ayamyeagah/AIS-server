@@ -4,7 +4,18 @@ migrate to .env, very soon.
 
 module.exports = {
     mongoose : {
-        uri : 'mongodb+srv://ayamyeagah:Kubeb1012@service-ais-db.kzhk0wn.mongodb.net/raw?retryWrites=true&w=majority&appName=service-ais-db'
+        uri : 'mongodb+srv://ayamyeagah:Kubeb1012@service-ais-db.kzhk0wn.mongodb.net/?retryWrites=true&w=majority&appName=service-ais-db'
+    },
+
+    collection : {
+        raw : 'raw',
+        vessel : 'vessel',
+        anomaly : 'anomaly',
+        message : 'message',
+        view : {
+            latest : 'latest',
+            traffic : 'traffic'
+        }
     },
 
     tcp : {

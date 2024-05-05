@@ -31,7 +31,8 @@ class NMEADecoder extends EventEmitter {
     // Method to handle decoded AIS message
     handleDecodedMessage(decodedMessage) {
         // Decoded AIS message stored to database
-        const aisMsg = JSON.parse(decodedMessage)
+        const aisMsg = JSON.parse(decodedMessage);
+        // const aisMsg = decodedMessage;
         // storeInDB(decodedResult);
         // console.log(decodedResult);
         this.emit('decoded', aisMsg);

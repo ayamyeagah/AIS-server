@@ -18,7 +18,7 @@
 //     console.log('Server started...')
 // });
 
-const config = require('../routes/config');
+const config = require('../config/config');
 const tcpDataConn = require('../utils/tcp-service');
 const Producer = require('./producer');
 const producer = new Producer();

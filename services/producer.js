@@ -1,8 +1,8 @@
 /* class for create producer in message queueing
 */
 
+const config = require('../config/config');
 const amqp = require('amqplib');
-const config = require('../routes/config');
 
 // 1. Connect to RabbitMQ server
 // 2. Create a new channel on that connection

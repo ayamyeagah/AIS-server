@@ -1,7 +1,7 @@
 // schema for reference
 
 const mongoose = require('mongoose');
-const config = require('../routes/config');
+const config = require('../config/config');
 
 // Define the schema for decoded messages
 const messageSchema = new mongoose.Schema(

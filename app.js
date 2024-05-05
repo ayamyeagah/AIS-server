@@ -1,7 +1,7 @@
 /* main application
 */
 
-const config = require('./routes/config')
+const config = require('./config/config')
 const routes = require('./routes/routes');
 const bodyParser = require('body-parser');
 const express = require('express');
