@@ -2,20 +2,17 @@
 */
 
 const AisDecoder = require('ais-stream-decoder');
-const EventEmitter = require('events');
-// const storeInDB = require('../database/storeDB');
+const { rejects } = require('assert');
+const { resolve } = require('path');
 
-class NMEADecoder extends EventEmitter {
+class NMEADecoder {
     constructor(options = {}) {
-        super();
-
         // Create an instance of the AIS decoder
         this.aisDecoder = new AisDecoder.default({ silent: options.silent || true });
 
         // Event handler for errors
         this.aisDecoder.on('error', err => {
             console.error(err);
-            this.emit('error', err);
         });
 
         // Event handler for decoded AIS messages
@@ -26,17 +23,14 @@ class NMEADecoder extends EventEmitter {
 
     // Method to write NMEA AIS message to decoder
     write(nmea) {
-        this.aisDecoder.write(nmea);
-    }
-
-    // Method to handle decoded AIS message
-    handleDecodedMessage(decodedMessage) {
-        // Decoded AIS message stored to database
-        const aisMsg = JSON.parse(decodedMessage);
-        // const aisMsg = decodedMessage;
-        // storeInDB(decodedResult);
-        // console.log(decodedResult);
-        this.emit('decoded', aisMsg);
+        return new Promise((resolve, rejects) => {
+            // Event handler for resolving Promise when data received
+            this.handleDecodedMessage = (decodedMessage) => {
+                const aisMsg = JSON.parse(decodedMessage);
+                resolve(aisMsg);
+            };
+            this.aisDecoder.write(nmea);
+        });
     }
 }
 
