@@ -4,14 +4,15 @@ const mongoose = require('mongoose');
 
 const saveRaw = async (sentences) => {
     try {
-        const raw = new Raw({
-            _id: new mongoose.Types.ObjectId(),
-            raw: sentences.join(),
+        // Mapping array [sentences] into array from object document
+        const documents = sentences.map(sentence => ({
+            raw: sentence,
             port: '1'
-        });
+        }));
 
-        await raw.save();
-        console.log('Saved');
+        // Save documents
+        const results = await Raw.insertMany(documents);
+        console.log('Saved', results);
     } catch (error) {
         console.error('Error saving data:', error);
     }

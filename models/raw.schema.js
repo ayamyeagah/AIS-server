@@ -6,10 +6,6 @@ const mongoose = require('mongoose');
 
 const rawSchema = new mongoose.Schema(
     {
-        _id: {
-            type: mongoose.ObjectId,
-            required: true
-        },
         raw: {
             type: String,
             required: true
