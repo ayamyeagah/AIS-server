@@ -29,51 +29,13 @@ const messageSchema = new mongoose.Schema(
             type: Int32,
             required: true
         },
-        sentence: {
+        sentences: {
             type: [String],
             required: true
-        },
-
-        // // type 1,2,3
-        // navstatus: {
-        //     type: Int32
-        // },
-        // rot: {
-        //     type: Int32
-        // },
-        // sog: {
-        //     type: Double
-        // },
-        // cog: {
-        //     type: Double
-        // },
-        // accuracy: {
-        //     type: Boolean
-        // },
-        // lat: {
-        //     type: Double
-        // },
-        // lon: {
-        //     type: Double
-        // },
-        // heading: {
-        //     type: Int32
-        // },
-        // utc: {
-        //     type: Int32
-        // },
-        // spec_manouvre: {
-        //     type: Int32
-        // },
-        // raim: {
-        //     type: Int32
-        // },
-        // radio: {
-        //     type: Int32
-        // },
-
+        }
     },
     {
+        strict: false,
         timestamps: true
     }
 );
