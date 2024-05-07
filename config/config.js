@@ -16,7 +16,10 @@ module.exports = {
         view: {
             latest: 'latest',
             traffic: 'traffic'
-        }
+        },
+        // test
+        static: 'static',
+        dynamic: 'dynamic'
     },
 
     tcp: {
