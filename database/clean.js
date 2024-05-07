@@ -4,6 +4,7 @@ migrate to specific rules, very soon.
 
 const Consumer = require('../services/consumer');
 const sentencesData = require('./raw');
+const aisMessageData = require('./message');
 const conn = require('./db-conn');
 const NMEADecoder = require('../utils/decoder-service');
 const decoder = new NMEADecoder();
@@ -19,7 +20,8 @@ async function clean() {
         await Consumer((nmea) => {
             decoder.write(nmea)
                 .then(aisMsg => {
-                    sentencesData(aisMsg);
+                    // sentencesData(aisMsg);
+                    aisMessageData(aisMsg);
                 });
         });
     } catch (error) {

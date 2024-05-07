@@ -9,10 +9,10 @@ const Double = require('@mongoosejs/double');
 const messageSchema = new mongoose.Schema(
     {
         // mandatory params
-        _id: {
-            type: mongoose.ObjectId,
-            required: true
-        },
+        // _id: {
+        //     type: mongoose.ObjectId,
+        //     required: true
+        // },
         type: {
             type: Int32,
             required: true

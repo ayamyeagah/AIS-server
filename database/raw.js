@@ -1,6 +1,7 @@
-const config = require('../config/config');
+/* Function for store sentences(raw) in AIS message params to db.raw
+*/
+
 const Raw = require('../models/raw.schema');
-const mongoose = require('mongoose');
 
 const saveRaw = async (sentences) => {
     try {
