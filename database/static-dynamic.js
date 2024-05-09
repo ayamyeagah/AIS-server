@@ -31,9 +31,11 @@
 // module.exports = saveTypes;
 
 // Anda membutuhkan model 'Dynamic' dan 'Static' yang sudah kita definisikan sebelumnya
-const { Dynamic, Static } = require('./models');
+const Dynamic = require('../models/dynamic.schema');
+const Static = require('../models/static.schema');
+const Message = require('../models/message.schema');
 
-function distributeData() {
+module.exports = function distributeData() {
     Message.find().then(messages => {
         messages.forEach(message => {
             const { type, ...data } = message._doc;
@@ -44,13 +46,13 @@ function distributeData() {
                 case 4:
                 case 8:
                 case 18:
-                    const dynamicData = new Dynamic(data);
-                    dynamicData.save();
+                    const dynamic = new Dynamic(data);
+                    dynamic.insertMany();
                     break;
                 case 5:
                 case 24:
-                    const staticData = new Static(data);
-                    staticData.save();
+                    const static = new Static(data);
+                    static.insertMany();
                     break;
             }
         });
@@ -60,5 +62,4 @@ function distributeData() {
 }
 
 // Panggil fungsi untuk mendistribusikan data
-distributeData();
 

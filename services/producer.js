@@ -17,14 +17,14 @@ class Producer {
         this.channel = await conn.createChannel();
     }
 
-    async publishMsg (routingKey, message) {
+    async publishMsg(routingKey, message) {
         if (!this.channel) {
             await this.createChannel();
         }
 
         const exchangeName = config.rabbitMQ.exchange;
         await this.channel.assertExchange(exchangeName, 'direct');
-        
+
         const msg = {
             type: config.rabbitMQ.routingKey,
             message: message
