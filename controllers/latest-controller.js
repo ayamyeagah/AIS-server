@@ -1,40 +1,16 @@
 /* Controller for latest message
 */
 
-const latest = db.createView("latest", "dynamic", [
-    {
-        $lookup: {
-            from: "static",
-            localField: "mmsi",
-            foreignField: "mmsi",
-            as: "static"
-        }
-    },
-    {
-        $unwind: {
-            path: "$static",
-            preserveNullAndEmptyArrays: true
-        }
-    },
-    {
-        $project: {
-            mmsi: 1,
-            shipName: {
-                $cond: {
-                    if: { $eq: ["$type", 8] },
-                    then: { $ifNull: ["$static.shipName", "$shipName"] },
-                    else: "$shipName"
-                }
-            },
-            lat: 1,
-            lon: 1,
-            vesselType: {
-                $cond: {
-                    if: { $eq: ["$type", 8] },
-                    then: { $ifNull: ["$static.vesselType", "$vesselType"] },
-                    else: "$vesselType"
-                }
-            }
-        }
+const Latest = require('../models/latest.schema');
+
+const getLatest = async (req, res) => {
+    try {
+        // const recents = await db.latest.aggregate({ $sort: { _id: -1 } });
+        const recents = await Latest.find({});
+        res.status(200).json(recents);
+    } catch (error) {
+        res.status(500).json({ message: error.message })
     }
-]);
+};
+
+module.exports = getLatest;

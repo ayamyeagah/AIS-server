@@ -2,14 +2,17 @@
 */
 
 const config = require('./config/config')
-const routes = require('./routes/routes');
+const routes = require('./routes/latest-route');
 const { messages, static, dynamic } = require('./routes/message-route');
 const bodyParser = require('body-parser');
 const conn = require('./database/db-conn');
 const express = require('express');
 const app = express();
 
-// app.use('/api', routes);
+// Middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
 
 const port = config.app.port;
 
@@ -20,12 +23,14 @@ conn()
         });
     });
 
+app.use('/api', routes);
+
 messages().catch(console.error());
 static().catch(console.error());
 dynamic().catch(console.error());
 
 app.get('/', (req, res) => {
-    res.send('TESTTTTT')
+    res.send('Live monitoring prahu')
 });
 // recent task
 // post data to db after decoder using post method (do it in 'routes/routes.js')

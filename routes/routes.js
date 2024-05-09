@@ -1,35 +1,35 @@
-/* API routes (get, post, update, delete)
-*/
+// /* API routes (get, post, update, delete)
+// */
 
-const express = require('express');
-const router = express.Router();
+// const express = require('express');
+// const router = express.Router();
 
-// GET
-router.get('/vessels', (req, res) => {
-    res.send("list of vessels");
-});
+// // GET
+// router.get('/vessels', (req, res) => {
+//     res.send("list of vessels");
+// });
 
-// GET (ID)
-router.get('/vessel/:id', (req, res) => {
-    const vesselId = req.params.id;
-    res.send(`Details of vessel ${vesselId}`);
-});
+// // GET (ID)
+// router.get('/vessel/:id', (req, res) => {
+//     const vesselId = req.params.id;
+//     res.send(`Details of vessel ${vesselId}`);
+// });
 
-// POST
-router.post('/vessels', (req, res) => {
-    res.send('Create a new vessel');
-});
+// // POST
+// router.post('/vessels', (req, res) => {
+//     res.send('Create a new vessel');
+// });
 
-// UPDATE
-router.put('/vessels/:id', (req, res) => {
-    const vesselId = req.params.id;
-    res.send(`Update vessel ${vesselId}`);
-});
+// // UPDATE
+// router.put('/vessels/:id', (req, res) => {
+//     const vesselId = req.params.id;
+//     res.send(`Update vessel ${vesselId}`);
+// });
 
-// DELETE
-router.delete('vessels/:id', (req, res) => {
-    const vesselId = req.params.id;
-    res.send(`Delete vessel ${vesselId}`);
-});
+// // DELETE
+// router.delete('vessels/:id', (req, res) => {
+//     const vesselId = req.params.id;
+//     res.send(`Delete vessel ${vesselId}`);
+// });
 
-module.exports = router;
+// module.exports = router;
