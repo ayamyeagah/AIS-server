@@ -74,4 +74,4 @@ const Dynamic = mongoose.model(
     config.collection.dynamic
 );
 
-model.exports = Dynamic;
+module.exports = Dynamic;

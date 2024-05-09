@@ -37,6 +37,22 @@ const staticSchema = new mongoose.Schema(
         destination: String,
         dte: Boolean,
 
+        // type: 8
+        dac: Double,
+        fid: Double,
+
+        // type: 8 (instatic land)
+        eni: String,
+        length: Double,
+        beam: Double,
+        shipType: Int32,
+        hazardCode: Int32,
+        draught: Double,
+        loadStatus: Int32,
+        speedQuality: Boolean,
+        courseQuality: Boolean,
+        headingQuality: Boolean,
+
         // type: 24
         partNum: Int32,
         vendorId: String,
