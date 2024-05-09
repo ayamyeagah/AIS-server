@@ -1,28 +1,28 @@
 /* Controller for static data
 */
 
-const conn = require('../database/db-conn');
 const Message = require('../models/message.schema');
-const Static = require('../models/static.schema');
 
-async function staticData() {
+module.exports = async function staticData() {
     try {
-        const db = conn();
-        // find all data with static types
-        const query = { type: { $in: [5, 8, 24] } };
-        const staticTypes = Message.find(query);
+        // Group and aggregate data with static types
+        const pipeline = [
+            {
+                $match: { type: { $in: [5, 8, 24] } }
+            },
+            {
+                $merge: {
+                    into: "static",
+                    on: "_id",
+                    whenMatched: "replace",
+                    whenNotMatched: "insert"
+                }
+            }
+        ];
 
-        // assign data to array
-        const docs = [];
-        for await (const doc of staticTypes) {
-            docs.push(doc);
-        }
+        await Message.aggregate(pipeline);
 
-        // save to dynamic collection
-        await Static.insertMany(docs);
     } catch (error) {
         console.error('Error for find type in db.message:', error);
     }
 };
-
-staticData().catch(console.error());

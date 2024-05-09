@@ -3,7 +3,7 @@
 
 const config = require('./config/config')
 const routes = require('./routes/routes');
-const messages = require('./routes/message-route');
+const { messages, static, dynamic } = require('./routes/message-route');
 const bodyParser = require('body-parser');
 const conn = require('./database/db-conn');
 const express = require('express');
@@ -21,6 +21,8 @@ conn()
     });
 
 messages().catch(console.error());
+static().catch(console.error());
+dynamic().catch(console.error());
 
 app.get('/', (req, res) => {
     res.send('TESTTTTT')
