@@ -65,6 +65,9 @@ const dynamicSchema = new mongoose.Schema(
         bandFlag: Boolean,
         msg22Flag: Boolean,
         modeFlag: Boolean,
+    },
+    {
+        timestamps: true
     }
 );
 
