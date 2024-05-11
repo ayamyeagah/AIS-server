@@ -4,11 +4,20 @@ collection utama yang digunakan untuk menampilkan ke front end
 
 const config = require('../config/config')
 const mongoose = require('mongoose');
+const Int32 = require('mongoose-int32').loadType(mongoose);
+const Double = require('@mongoosejs/double');
 
 const latestSchema = new mongoose.Schema(
     {
-        lat: Number,
-        lon: Number
+        _id: Int32,
+        lat: Double,
+        lon: Double,
+        name: {
+            type: String,
+            uppercase: true
+        },
+        createdAt: Date
+
     },
     {
         autoCreate: false,
@@ -17,9 +26,9 @@ const latestSchema = new mongoose.Schema(
 );
 
 const Latest = mongoose.model(
-    config.collection.latest,
+    config.collection.view.latest,
     latestSchema,
-    config.collection.latest
+    config.collection.view.latest
 );
 
 module.exports = Latest;
