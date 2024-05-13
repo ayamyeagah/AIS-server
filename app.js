@@ -6,12 +6,14 @@ const routes = require('./routes/latest-route');
 const { messages, static, dynamic } = require('./routes/message-route');
 const bodyParser = require('body-parser');
 const conn = require('./database/db-conn');
+const cors = require('cors');
 const express = require('express');
 const app = express();
 
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(cors());
 
 
 const port = config.app.port;
