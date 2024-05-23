@@ -4,6 +4,7 @@
   "description": "build web for integrating some station and a hardware to monitoring vessel using automatic identification system",
   "main": "app.js",
   "scripts": {
+    "test": "jest",
     "start": "node app.js",
     "dev": "nodemon app.js",
     "service": "node ./services/services.js"
@@ -31,6 +32,7 @@
     "split": "^1.0.1"
   },
   "devDependencies": {
+    "jest": "^29.7.0",
     "nodemon": "^3.1.0"
   }
 }

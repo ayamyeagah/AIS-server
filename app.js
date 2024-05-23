@@ -3,7 +3,7 @@
 
 const config = require('./config/config')
 const routes = require('./routes/latest-route');
-const { messages, static, dynamic } = require('./routes/message-route');
+const messages = require('./routes/message-route');
 const bodyParser = require('body-parser');
 const conn = require('./database/db-conn');
 const cors = require('cors');
@@ -28,8 +28,8 @@ conn()
 app.use('/api', routes);
 
 messages().catch(console.error());
-static().catch(console.error());
-dynamic().catch(console.error());
+// static().catch(console.error());
+// dynamic().catch(console.error());
 
 app.get('/', (req, res) => {
     res.send('Live monitoring prahu')
