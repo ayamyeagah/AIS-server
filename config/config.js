@@ -23,8 +23,8 @@ module.exports = {
     },
 
     tcp: {
-        host: '103.24.49.246',
-        port: 34567
+        host: '103.167.35.10',
+        port: 2567
     },
 
     rabbitMQ: {

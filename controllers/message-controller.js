@@ -15,7 +15,7 @@ module.exports = async function messageController() {
                 });
         });
     } catch (error) {
-        console.error();
+        console.error('Error consuming message:', error);
     }
 };
 
