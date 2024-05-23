@@ -28,8 +28,6 @@ conn()
 app.use('/api', routes);
 
 messages().catch(console.error());
-// static().catch(console.error());
-// dynamic().catch(console.error());
 
 app.get('/', (req, res) => {
     res.send('Live monitoring prahu')
