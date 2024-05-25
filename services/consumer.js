@@ -54,3 +54,28 @@ class Consumer {
 }
 
 module.exports = Consumer;
+
+/*
+* Uncomment this to listening for local streaming data
+* Dont forget to adapting calling function in controllers/message-controller.js
+*/
+// async function consumeMsg(callback) {
+//     const conn = await amqp.connect(config.amqp.local.uri);
+//     const channel = await conn.createChannel();
+
+//     const exchangeName = config.amqp.local.exchange;
+//     const routingKey = config.amqp.local.routingKey;
+//     const queueName = config.amqp.local.infoQueue;
+
+//     await channel.assertExchange(exchangeName, 'direct');
+//     const q = await channel.assertQueue(queueName);
+//     await channel.bindQueue(q.queue, exchangeName, routingKey);
+
+//     channel.consume(q.queue, (msg) => {
+//         const data = JSON.parse(msg.content);
+//         callback(data.message);
+//         channel.ack(msg);
+//     });
+// }
+
+// module.exports = consumeMsg;
