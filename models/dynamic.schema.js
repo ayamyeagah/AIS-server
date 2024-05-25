@@ -23,13 +23,13 @@ const dynamicSchema = new mongoose.Schema(
         rateOfTurn: Double,
         speedOverGround: Double,
         accuracy: Boolean,
-        loc: {
-            type: {
-                type: String,
-                enum: ['Point']
-            },
-            coordinates: [Double]
-        },
+        // loc: {
+        //     type: {
+        //         type: String,
+        //         enum: ['Point']
+        //     },
+        //     coordinates: [Double]
+        // },
         lon: Double,
         lat: Double,
         courseOverGround: Double,

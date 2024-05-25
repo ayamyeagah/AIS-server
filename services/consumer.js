@@ -1,32 +1,56 @@
 /* function for consuming incoming data from queue
 */
 
+/**
+ * For consume message from broker
+ *
+ * 1. Connect to rabbitmq server
+ * 2. Create a new channel
+ * 3. Create the exchange
+ * 4. Create the queue
+ * 5. Bind the queue to the exchange
+ * 6. Consume message from the queue
+ */
+
 const config = require('../config/config');
 const amqp = require('amqplib');
 
-// 1. Connect to RabbitMQ server
-// 2. Create a new channel
-// 3. Create the exchange
-// 4. Create the queue
-// 5. Bind the queue to the exchange
-// 6. Consume message from the queue
+const uri = config.amqp.production.uri;
+const routingKey = config.amqp.production.routing;
+const exchange = config.amqp.production.exchange;
+const queueName = config.amqp.production.queue;
 
-async function consumeMsg(callback) {
-    const conn = await amqp.connect(config.rabbitMQ.uri);
-    const channel = await conn.createChannel();
+class Consumer {
+    channel;
 
-    const exchangeName = config.rabbitMQ.exchange;
-    const queueName = config.rabbitMQ.infoQueue;
+    async createChannel() {
+        try {
+            const conn = await amqp.connect(uri);
+            this.channel = await conn.createChannel();
+        } catch (err0) {
+            console.error('Error connection & creating channel:', err0);
+        }
+    }
 
-    await channel.assertExchange(exchangeName, 'direct');
-    const q = await channel.assertQueue(queueName);
-    await channel.bindQueue(q.queue, exchangeName, 'nmea');
+    async sub(callback) {
+        try {
+            if (!this.channel) {
+                await this.createChannel();
+            }
 
-    channel.consume(q.queue, (msg) => {
-        const data = JSON.parse(msg.content);
-        callback(data.message);
-        channel.ack(msg);
-    });
+            await this.channel.assertExchange(exchange, 'direct');
+            const q = await this.channel.assertQueue(queueName);
+            await this.channel.bindQueue(q.queue, exchange, routingKey);
+
+            this.channel.consume(q.queue, (msg) => {
+                const data = JSON.parse(msg.content);
+                callback(data.message);
+                this.channel.ack(msg);
+            });
+        } catch (err1) {
+            console.error('Error consuming message:', err1);
+        }
+    }
 }
 
-module.exports = consumeMsg;
+module.exports = Consumer;

@@ -23,15 +23,32 @@ module.exports = {
     },
 
     tcp: {
-        host: '103.167.35.10',
-        port: 2567
+        // host: '103.167.35.10',
+        // port: 2567
+        host: '103.24.49.246',
+        port: 34567
     },
 
-    rabbitMQ: {
-        uri: 'amqp://localhost',
-        routingKey: 'nmea',
-        exchange: 'dataExchange',
-        infoQueue: 'rawQueue',
+    amqp: {
+        local: {
+            uri: 'amqp://localhost',
+            routingKey: 'nmea',
+            exchange: 'dataExchange',
+            infoQueue: 'rawQueue',
+        },
+        production: {
+            host: 'labnav.my.id',
+            uri: 'amqp://ayamyeagah:1012@labnav.my.id:5672',
+            port: 5671,
+            SSL: {
+                ca: './ssl/ca_cert.pem',
+                cert: './ssl/to/ca_cert.pem',
+                key: './ssl/to/ca_cert.pem'
+            },
+            exchange: 'ais',
+            routing: 'nmea',
+            queue: 'station'
+        }
     },
 
     app: {

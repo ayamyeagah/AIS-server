@@ -17,10 +17,10 @@ function tcpDataConn(port, host, onDataReceived) {
     // Pipe the TCP client stream through the split transform
     clientSocket
         .pipe(split())
-        .on('data', data => {   
+        .on('data', data => {
             // Data received stored to onDataReceived variable
             onDataReceived(data.toString());
-    });
+        });
 
     // Event handler for socket close
     clientSocket.on('close', () => {
