@@ -5,8 +5,8 @@
   "main": "app.js",
   "scripts": {
     "test": "jest",
-    "start": "node app.js",
-    "dev": "nodemon app.js",
+    "start": "NODE_ENV=production node app.js",
+    "dev": "NODE_ENV=development nodemon app.js",
     "service": "node ./services/services.js"
   },
   "repository": {

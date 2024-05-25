@@ -15,10 +15,10 @@
 const config = require('../config/config');
 const amqp = require('amqplib');
 
-const uri = config.amqp.production.uri;
-const routingKey = config.amqp.production.routing;
-const exchange = config.amqp.production.exchange;
-const queueName = config.amqp.production.queue;
+const uri = config.amqp.public.uri;
+const routingKey = config.amqp.public.routing;
+const exchange = config.amqp.public.exchange;
+const queueName = config.amqp.public.queue;
 
 class Consumer {
     channel;

@@ -1,5 +1,7 @@
+# module
 node_modules
-config/
 .vscode
 
-block-diagram.png
+# environment variables
+.env
+.env.production

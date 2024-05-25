@@ -1,57 +1,55 @@
-/* for config environment
-migrate to .env, very soon.
-*/
+/**
+ * configuration
+ */
+
+const dotenv = require('dotenv');
+const path = require('path');
+
+const envFile = process.env.NODE_ENV === 'production' ? '.env.production' : '.env';
+dotenv.config({ path: path.resolve(process.cwd(), envFile) });
 
 module.exports = {
-    mongoose: {
-        // uri : 'mongodb+srv://ayamyeagah:Kubeb1012@service-ais-db.kzhk0wn.mongodb.net/?retryWrites=true&w=majority&appName=service-ais-db'
-        uri: 'mongodb+srv://ayamyeagah:Kubeb1012@cluster0.fmes5hv.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
+    db: {
+        uri: process.env.MONGODB_URI,
     },
-
     collection: {
-        raw: 'raw',
-        vessel: 'vessel',
-        anomaly: 'anomaly',
-        message: 'message',
+        raw: process.env.COLLECTION_RAW,
+        vessel: process.env.COLLECTION_VESSEL,
+        anomaly: process.env.COLLECTION_ANOMALY,
+        message: process.env.COLLECTION_MESSAGE,
         view: {
-            latest: 'latest',
-            traffic: 'traffic'
+            latest: process.env.COLLECTION_VIEW_LATEST,
+            traffic: process.env.COLLECTION_VIEW_TRAFFIC,
         },
-        // test
-        static: 'static',
-        dynamic: 'dynamic'
+        static: process.env.COLLECTION_STATIC,
+        dynamic: process.env.COLLECTION_DYNAMIC,
     },
-
     tcp: {
-        // host: '103.167.35.10',
-        // port: 2567
-        host: '103.24.49.246',
-        port: 34567
+        host: process.env.TCP_HOST,
+        port: process.env.TCP_PORT,
     },
-
     amqp: {
         local: {
-            uri: 'amqp://localhost',
-            routingKey: 'nmea',
-            exchange: 'dataExchange',
-            infoQueue: 'rawQueue',
+            uri: process.env.AMQP_LOCAL_URI,
+            routingKey: process.env.AMQP_LOCAL_ROUTING_KEY,
+            exchange: process.env.AMQP_LOCAL_EXCHANGE,
+            infoQueue: process.env.AMQP_LOCAL_INFO_QUEUE,
         },
-        production: {
-            host: 'labnav.my.id',
-            uri: 'amqp://ayamyeagah:1012@labnav.my.id:5672',
-            port: 5671,
+        public: {
+            host: process.env.AMQP_PUBLIC_HOST,
+            uri: process.env.AMQP_PUBLIC_URI,
+            port: process.env.AMQP_PUBLIC_PORT,
             SSL: {
-                ca: './ssl/ca_cert.pem',
-                cert: './ssl/to/ca_cert.pem',
-                key: './ssl/to/ca_cert.pem'
+                ca: process.env.AMQP_PUBLIC_SSL_CA,
+                cert: process.env.AMQP_PUBLIC_SSL_CERT,
+                key: process.env.AMQP_PUBLIC_SSL_KEY,
             },
-            exchange: 'ais',
-            routing: 'nmea',
-            queue: 'station'
+            exchange: process.env.AMQP_PUBLIC_EXCHANGE,
+            routing: process.env.AMQP_PUBLIC_ROUTING,
+            queue: process.env.AMQP_PUBLIC_QUEUE,
         }
     },
-
     app: {
-        port: 3000
+        port: process.env.APP_PORT,
     }
-}
+};
