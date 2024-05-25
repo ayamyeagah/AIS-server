@@ -5,14 +5,13 @@ Repository of AIS Server in Communication & Navigation Laboratorium Shipbuilding
 - [DONE] Decoding AIS Message
 - [DONE] Store in MongoDB Database
 - [DONE] Create Schema and Model for Decoded Message using Mongoose
-- [IN PROGRESS] Build Microservices for Hardware, Datastream, & Database
+- [DONE] Build Microservices for Hardware, Datastream, & Database
 - [NOT STARTED] Build Docker for Project Environment
-- [NOT STARTED] Create REST API
-- [NOT STARTED] Create Interface for Monitoring (front end)
+- [DONE] Create REST API
+- [DONE] Create Interface for Monitoring (front end)
 - [NOT STARTED] Create Analysis for Vessel Traffic (front end)
-- [NOT STARTED] Integration Front End & Back End
-- [NOT STARTED] Desain Schematic & PCB (hardware)
-- [NOT STARTED] Desain 3D for Hardware Casing (hardware)
-- [NOT STARTED] Build Program for Transmitter & Receiver (hardware)
-- [NOT STARTED] Integration Hardware and Web
-- [NOT STARTED] Cracking Library for GPS
+- [DONE] Integration Front End & Back End
+- [DONE] Desain Schematic & PCB (hardware)
+- [DONE] Desain 3D for Hardware Casing (hardware)
+- [DONE] Build Program for Transmitter
+- [DONE] Integration Hardware and Web
