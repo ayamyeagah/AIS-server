@@ -1,28 +1,41 @@
-const connectDB = require('./database/connectDB');
-const connectToTCPServer = require('./services/datastream');
-const NMEADecoder = require('./decoder');
-const config = require('./config');
+/* Main Application
+*/
+const dotenv = require('dotenv');
+const path = require('path');
+const config = require('./config/config');
+const routes = require('./routes/latest-route');
+const mongoose = require('mongoose');
+const messages = require('./routes/message-route');
+const cors = require('cors');
+const express = require('express');
 
-// TCP server configuration
-const PORT = config.tcp.port;
-const HOST = config.tcp.host;
+// env
+const envFile = process.env.NODE_ENV === 'production' ? '.env.production' : '.env';
+dotenv.config({ path: path.resolve(process.cwd(), envFile) });
 
-const nmeaDecoder = new NMEADecoder();
+const app = express();
 
-// Connect to MongoDB
-connectDB()
-    .then(db => {
-        if (db) {
-            // Start TCP server
-            connectToTCPServer(PORT, HOST, nmea => {
-                // Write the NMEA AIS message to the decoder
-                nmeaDecoder.write(nmea);
-            });
-        } else {
-            console.error('Failed to connect to MongoDB');
-        }
+// Middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cors());
+
+// Connection
+mongoose.connect(config.db.uri)
+    .then(() => {
+        console.log('CONNECTED TO MONGODB');
+        app.listen(config.app.port, () => {
+            console.log(`Server: http://localhost:${config.app.port}`);
+        });
     })
-    .catch(err => {
-        console.error('Error:', err);
-    });
-    
+    .catch((err) => {
+        console.error('CONNECTION FAILED')
+    })
+
+// Routes
+app.use('/api', routes);
+messages().catch(console.error());
+
+app.get('/', (req, res) => {
+    res.send('Live monitoring prahu')
+});

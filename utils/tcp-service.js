@@ -1,8 +1,12 @@
+/* utils for handling AIS data over socket connection as a client
+will be migrate to mqtt. soon.
+*/
+
 const net = require('net');
 const split = require('split');
 
 // Function to connect to TCP server using a socket
-function connectToTCPServer(port, host, onDataReceived) {
+function tcpDataConn(port, host, onDataReceived) {
     const clientSocket = new net.Socket();
 
     // Connect to the TCP server
@@ -13,10 +17,10 @@ function connectToTCPServer(port, host, onDataReceived) {
     // Pipe the TCP client stream through the split transform
     clientSocket
         .pipe(split())
-        .on('data', data => {   
+        .on('data', data => {
             // Data received stored to onDataReceived variable
             onDataReceived(data.toString());
-    });
+        });
 
     // Event handler for socket close
     clientSocket.on('close', () => {
@@ -31,4 +35,4 @@ function connectToTCPServer(port, host, onDataReceived) {
     return clientSocket;
 }
 
-module.exports = connectToTCPServer;
+module.exports = tcpDataConn;

@@ -4,7 +4,10 @@
   "description": "build web for integrating some station and a hardware to monitoring vessel using automatic identification system",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js"
+    "test": "jest",
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "service": "node ./services/services.js"
   },
   "repository": {
     "type": "git",
@@ -14,13 +17,22 @@
   "license": "ISC",
   "dependencies": {
     "ais-stream-decoder": "^2.1.2",
-    "dgram": "^1.0.1",
+    "amqplib": "^0.10.3",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "events": "^3.3.0",
     "express": "^4.18.2",
     "fs": "^0.0.1-security",
     "mongodb": "^6.4.0",
     "mongoose": "^8.2.0",
+    "mongoose-int32": "^0.6.0",
     "net": "^1.0.2",
     "path": "^0.12.7",
     "split": "^1.0.1"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "nodemon": "^3.1.0"
   }
 }
