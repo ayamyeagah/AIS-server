@@ -5,13 +5,12 @@ collection utama yang digunakan untuk menampilkan ke front end
 const config = require('../config/config')
 const mongoose = require('mongoose');
 const Int32 = require('mongoose-int32').loadType(mongoose);
-const Double = require('@mongoosejs/double');
 
 const latestSchema = new mongoose.Schema(
     {
         _id: Int32,
-        lat: Double,
-        lon: Double,
+        lat: Number,
+        lon: Number,
         name: {
             type: String,
             uppercase: true

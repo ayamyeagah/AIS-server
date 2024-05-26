@@ -4,7 +4,6 @@
 const config = require('../config/config');
 const mongoose = require('mongoose');
 const Int32 = require('mongoose-int32').loadType(mongoose);
-const Double = require('@mongoosejs/double');
 
 const messageSchema = new mongoose.Schema(
     {

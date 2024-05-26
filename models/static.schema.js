@@ -4,7 +4,6 @@
 const config = require('../config/config');
 const mongoose = require('mongoose');
 const Int32 = require('mongoose-int32').loadType(mongoose);
-const Double = require('@mongoosejs/double');
 
 const staticSchema = new mongoose.Schema(
     {
@@ -24,30 +23,30 @@ const staticSchema = new mongoose.Schema(
         callSign: String,
         name: String,
         typeAndCargo: Int32,
-        dimBow: Double,
-        dimStern: Double,
-        dimPort: Double,
-        dimStarboard: Double,
-        epfd: Double,
+        dimBow: Number,
+        dimStern: Number,
+        dimPort: Number,
+        dimStarboard: Number,
+        epfd: Number,
         etaMonth: Int32,
         etaDay: Int32,
         etaHour: Int32,
         etaMinutes: Int32,
-        draught: Double,
+        draught: Number,
         destination: String,
         dte: Boolean,
 
         // type: 8
-        dac: Double,
-        fid: Double,
+        dac: Number,
+        fid: Number,
 
         // type: 8 (instatic land)
         eni: String,
-        length: Double,
-        beam: Double,
+        length: Number,
+        beam: Number,
         shipType: Int32,
         hazardCode: Int32,
-        draught: Double,
+        draught: Number,
         loadStatus: Int32,
         speedQuality: Boolean,
         courseQuality: Boolean,

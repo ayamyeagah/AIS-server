@@ -4,7 +4,6 @@
 const config = require('../config/config');
 const mongoose = require('mongoose');
 const Int32 = require('mongoose-int32').loadType(mongoose);
-const Double = require('@mongoosejs/double');
 
 const dynamicSchema = new mongoose.Schema(
     {
@@ -20,8 +19,8 @@ const dynamicSchema = new mongoose.Schema(
 
         // type: 1,2,3
         navStatus: Int32,
-        rateOfTurn: Double,
-        speedOverGround: Double,
+        rateOfTurn: Number,
+        speedOverGround: Number,
         accuracy: Boolean,
         // loc: {
         //     type: {
@@ -30,10 +29,10 @@ const dynamicSchema = new mongoose.Schema(
         //     },
         //     coordinates: [Double]
         // },
-        lon: Double,
-        lat: Double,
-        courseOverGround: Double,
-        heading: Double,
+        lon: Number,
+        lat: Number,
+        courseOverGround: Number,
+        heading: Number,
         utcSecond: Int32,
         specialManouvre: Int32,
         raim: Boolean,
@@ -46,19 +45,19 @@ const dynamicSchema = new mongoose.Schema(
         hour: Int32,
         minute: Int32,
         second: Int32,
-        epfd: Double,
+        epfd: Number,
 
         // type: 8
-        dac: Double,
-        fid: Double,
+        dac: Number,
+        fid: Number,
 
         // type: 8 (instatic land)
         eni: String,
-        length: Double,
-        beam: Double,
+        length: Number,
+        beam: Number,
         shipType: Int32,
         hazardCode: Int32,
-        draught: Double,
+        draught: Number,
         loadStatus: Int32,
         speedQuality: Boolean,
         courseQuality: Boolean,

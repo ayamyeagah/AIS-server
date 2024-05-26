@@ -16,7 +16,6 @@
   "author": "ayamyeagah",
   "license": "ISC",
   "dependencies": {
-    "@mongoosejs/double": "^0.3.0",
     "ais-stream-decoder": "^2.1.2",
     "amqplib": "^0.10.3",
     "body-parser": "^1.20.2",
