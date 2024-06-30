@@ -25,8 +25,8 @@ module.exports = {
         dynamic: process.env.COLLECTION_DYNAMIC,
     },
     tcp: {
-        host: process.env.TCP_HOST,
-        port: process.env.TCP_PORT,
+        host: process.env.TCP_HOST_1,
+        port: process.env.TCP_PORT_1,
     },
     amqp: {
         local: {
