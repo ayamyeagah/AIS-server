@@ -13,7 +13,7 @@ class Producer {
     channel;
 
     async createChannel() {
-        const conn = await amqp.connect(config.rabbitMQ.uri);
+        const conn = await amqp.connect(config.amqp.local.uri);
         this.channel = await conn.createChannel();
     }
 
@@ -22,11 +22,11 @@ class Producer {
             await this.createChannel();
         }
 
-        const exchangeName = config.rabbitMQ.exchange;
+        const exchangeName = config.amqp.local.exchange;
         await this.channel.assertExchange(exchangeName, 'direct');
 
         const msg = {
-            type: config.rabbitMQ.routingKey,
+            type: config.amqp.local.routingKey,
             message: message
         };
 
