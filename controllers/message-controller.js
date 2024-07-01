@@ -7,14 +7,14 @@ const Dynamic = require('../models/dynamic.schema');
 const Static = require('../models/static.schema');
 const NMEADecoder = require('../utils/decoder-service');
 
-const consumer = new Consumer();
+// const consumer = new Consumer();
 const decoder = new NMEADecoder();
 const BATCH_SIZE = 50;
 
 module.exports = async function messageController() {
     try {
         let batch = [];
-        await consumer.sub(async (nmea) => {
+        await Consumer(async (nmea) => {
             try {
                 const aisMsg = await decoder.write(nmea);
                 batch.push(aisMsg);
