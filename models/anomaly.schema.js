@@ -1,2 +1,0 @@
-/* schema for anomaly NMEA data
-*/

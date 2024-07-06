@@ -20,6 +20,9 @@ const amqp = require('amqplib');
 // const exchange = config.amqp.public.exchange;
 // const queueName = config.amqp.public.queue;
 
+const PREFETCH_COUNT = 500
+const BATCH_SIZE = 500
+
 // class Consumer {
 //     channel;
 
@@ -71,10 +74,38 @@ async function consumeMsg(callback) {
     const q = await channel.assertQueue(queueName);
     await channel.bindQueue(q.queue, exchangeName, routingKey);
 
+    channel.prefetch(PREFETCH_COUNT);
+
+    let messages = []
+
     channel.consume(q.queue, (msg) => {
-        const data = JSON.parse(msg.content);
-        callback(data.message);
-        channel.ack(msg);
+        if (msg !== null) {
+            const data = JSON.parse(msg.content);
+            messages.push({ message: data.message, msgObj: msg });
+
+            if (messages.length >= BATCH_SIZE) {
+                processBatch(messages, callback, channel);
+                messages = [];
+            }
+        }
+        // const data = JSON.parse(msg.content);
+        // callback(data.message);
+        // channel.ack(msg);
+    }, { noAck: false });
+
+    // interval
+    setInterval(() => {
+        if (messages.length > 0) {
+            processBatch(messages, callback, channel);
+            messages = [];
+        }
+    }, 1000);
+}
+
+function processBatch(messages, callback, channel) {
+    messages.forEach(({ message, msgObj }) => {
+        callback(message);
+        channel.ack(msgObj);
     });
 }
 

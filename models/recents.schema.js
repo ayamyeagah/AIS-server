@@ -1,13 +1,13 @@
 /* create view / schema for main purpose.
-collection utama yang digunakan untuk menampilkan ke front end
+collection for test
 */
 
 const config = require('../config/config')
 const mongoose = require('mongoose');
 
-const latestSchema = new mongoose.Schema(
+const recentsSchema = new mongoose.Schema(
     {
-        _id: {
+        mmsi: {
             type: Number,
             required: true
         },
@@ -15,11 +15,11 @@ const latestSchema = new mongoose.Schema(
             type: Object,
             required: true
         },
-        static: {
-            type: Object,
-            required: true
-        },
-        coordinates: {
+        // static: {
+        //     type: Object,
+        //     required: true
+        // }
+        location: {
             type: {
                 type: String,
                 enum: ['Point'],
@@ -34,10 +34,10 @@ const latestSchema = new mongoose.Schema(
     }
 );
 
-const Latest = mongoose.model(
-    config.collection.view.latest,
-    latestSchema,
-    config.collection.view.latest
+Recents = mongoose.model(
+    'recents',
+    recentsSchema,
+    'recents'
 );
 
-module.exports = Latest;
+module.exports = Recents;

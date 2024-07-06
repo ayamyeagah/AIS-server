@@ -5,11 +5,12 @@ const Consumer = require('../services/consumer');
 const Message = require('../models/message.schema');
 const Dynamic = require('../models/dynamic.schema');
 const Static = require('../models/static.schema');
+const Recents = require('../models/recents.schema');
 const NMEADecoder = require('../utils/decoder-service');
 
 // const consumer = new Consumer();
 const decoder = new NMEADecoder();
-const BATCH_SIZE = 50;
+const BATCH_SIZE = 500;
 
 module.exports = async function messageController() {
     try {
@@ -45,7 +46,7 @@ const saveMessages = async (messages) => {
         });
 
         const savedMessages = await Message.insertMany(await Promise.all(validatedMessages));
-        console.log('Saved to DB');
+        // console.log('Saved to DB');
 
         // Filter messages and save to Dynamic and Static
         const dataForDynamic = savedMessages.filter(msg => filterForDynamic(msg));
@@ -60,6 +61,30 @@ const saveMessages = async (messages) => {
             await Static.insertMany(dataForStatic);
             console.log('Saved to Static');
         }
+
+        // Upsert to latest collection using bulkWrite
+        if (dataForDynamic.length > 0) {
+            const bulkOps = dataForDynamic.map(dynamicMsg => ({
+                updateOne: {
+                    filter: { mmsi: dynamicMsg.mmsi },
+                    update: {
+                        $set: {
+                            dynamic: dynamicMsg,
+                            location: {
+                                type: "Point",
+                                coordinates: [dynamicMsg.lon, dynamicMsg.lat]
+                            }
+                        }
+                    },
+                    upsert: true
+                }
+            }));
+
+            await Recents.bulkWrite(bulkOps);
+            console.log('Saved to Latest');
+        }
+
+        // await updateLatestCollection(dataForDynamic, dataForStatic);
     } catch (error) {
         console.error('Error saving AIS messages:', error.message);
     }
@@ -76,3 +101,29 @@ const filterForStatic = (message) => {
     const typesForStatic = [5, 8, 24];
     return typesForStatic.includes(message.type);
 };
+
+// const updateLatestCollection = async (dynamicMessages, staticMessages) => {
+//     try {
+//         const latestData = {};
+
+//         dynamicMessages.forEach(msg => {
+//             if (!latestData[msg.mmsi]) {
+//                 latestData[msg.mmsi] = { mmsi: msg.mmsi, dynamic: {}, static: {} };
+//             }
+//             latestData[msg.mmsi].dynamic = msg;
+//         });
+
+//         staticMessages.forEach(msg => {
+//             if (!latestData[msg.mmsi]) {
+//                 latestData[msg.mmsi] = { mmsi: msg.mmsi, dynamic: {}, static: {} };
+//             }
+//             latestData[msg.mmsi].static = msg;
+//         });
+
+//         const latestEntries = Object.values(latestData);
+
+//         await Recents.insertMany(latestEntries);
+//         console.log('Saved to Latest');
+//     } catch (error) {
+//         console.error('Error updating latest collection:', error.message);
+//     }// };

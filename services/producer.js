@@ -36,7 +36,7 @@ class Producer {
             Buffer.from(JSON.stringify(msg))
         );
 
-        console.log(`${message} sent to ${exchangeName}`);
+        console.log(`${message}`);
     }
 }
 
