@@ -62,9 +62,9 @@ const saveMessages = async (messages) => {
             console.log('Saved to Static');
         }
 
-        // Upsert to latest collection using bulkWrite
+        // Upsert to latest collection for dynamic data
         if (dataForDynamic.length > 0) {
-            const bulkOps = dataForDynamic.map(dynamicMsg => ({
+            const bulkOpsDynamic = dataForDynamic.map(dynamicMsg => ({
                 updateOne: {
                     filter: { mmsi: dynamicMsg.mmsi },
                     update: {
@@ -74,17 +74,48 @@ const saveMessages = async (messages) => {
                                 type: "Point",
                                 coordinates: [dynamicMsg.lon, dynamicMsg.lat]
                             }
+                        },
+                        $setOnInsert: {
+                            static: {},
+                            name: "Unknown",
+                            type: 0,
                         }
                     },
                     upsert: true
                 }
             }));
 
-            await Recents.bulkWrite(bulkOps);
-            console.log('Saved to Latest');
+            await Recents.bulkWrite(bulkOpsDynamic);
+            console.log('Saved Dynamic Data to Latest');
         }
 
-        // await updateLatestCollection(dataForDynamic, dataForStatic);
+        // Upsert to latest collection for static data
+        if (dataForStatic.length > 0) {
+            const bulkOpsStatic = dataForStatic.map(staticMsg => ({
+                updateOne: {
+                    filter: { mmsi: staticMsg.mmsi },
+                    update: {
+                        $set: {
+                            static: staticMsg,
+                            name: staticMsg.name,
+                            type: staticMsg.typeAndCargo
+                        },
+                        $setOnInsert: {
+                            dynamic: {},
+                            coordinates: {
+                                type: "Point",
+                                coordinates: [0, 0]
+                            }
+                        }
+                    },
+                    upsert: true
+                }
+            }));
+
+            await Recents.bulkWrite(bulkOpsStatic);
+            console.log('Saved static data to Latest');
+        }
+
     } catch (error) {
         console.error('Error saving AIS messages:', error.message);
     }
@@ -101,29 +132,3 @@ const filterForStatic = (message) => {
     const typesForStatic = [5, 8, 24];
     return typesForStatic.includes(message.type);
 };
-
-// const updateLatestCollection = async (dynamicMessages, staticMessages) => {
-//     try {
-//         const latestData = {};
-
-//         dynamicMessages.forEach(msg => {
-//             if (!latestData[msg.mmsi]) {
-//                 latestData[msg.mmsi] = { mmsi: msg.mmsi, dynamic: {}, static: {} };
-//             }
-//             latestData[msg.mmsi].dynamic = msg;
-//         });
-
-//         staticMessages.forEach(msg => {
-//             if (!latestData[msg.mmsi]) {
-//                 latestData[msg.mmsi] = { mmsi: msg.mmsi, dynamic: {}, static: {} };
-//             }
-//             latestData[msg.mmsi].static = msg;
-//         });
-
-//         const latestEntries = Object.values(latestData);
-
-//         await Recents.insertMany(latestEntries);
-//         console.log('Saved to Latest');
-//     } catch (error) {
-//         console.error('Error updating latest collection:', error.message);
-//     }// };

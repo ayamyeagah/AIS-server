@@ -11,14 +11,22 @@ const recentsSchema = new mongoose.Schema(
             type: Number,
             required: true
         },
+        name: {
+            type: String,
+            required: true
+        },
+        type: {
+            type: Number,
+            required: true
+        },
         dynamic: {
             type: Object,
             required: true
         },
-        // static: {
-        //     type: Object,
-        //     required: true
-        // }
+        static: {
+            type: Object,
+            required: true
+        },
         location: {
             type: {
                 type: String,
