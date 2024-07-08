@@ -1,13 +1,8 @@
 /* class for create producer in message queueing
 */
 
-const config = require('../config/config');
+const config = require('../../config/config');
 const amqp = require('amqplib');
-
-// 1. Connect to RabbitMQ server
-// 2. Create a new channel on that connection
-// 3. Create the exchange
-// 4. Publish the message to the exchange with a routing key
 
 class Producer {
     channel;

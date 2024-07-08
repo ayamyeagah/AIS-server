@@ -1,8 +1,8 @@
 /* script for starting message queueing protocol
 */
 
-const config = require('../config/config');
-const tcpDataConn = require('../utils/tcp-service');
+const config = require('../../config/config');
+const tcpDataConn = require('../../utils/tcp-service');
 const Producer = require('./producer');
 const producer = new Producer();
 

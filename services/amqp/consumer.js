@@ -1,18 +1,7 @@
 /* function for consuming incoming data from queue
 */
 
-/**
- * For consume message from broker
- *
- * 1. Connect to rabbitmq server
- * 2. Create a new channel
- * 3. Create the exchange
- * 4. Create the queue
- * 5. Bind the queue to the exchange
- * 6. Consume message from the queue
- */
-
-const config = require('../config/config');
+const config = require('../../config/config');
 const amqp = require('amqplib');
 
 // const uri = config.amqp.public.uri;
@@ -45,15 +34,39 @@ const BATCH_SIZE = 500
 //             const q = await this.channel.assertQueue(queueName);
 //             await this.channel.bindQueue(q.queue, exchange, routingKey);
 
+//             channel.prefetch(PREFETCH_COUNT);
+
+//             let messages = []
+
 //             this.channel.consume(q.queue, (msg) => {
-//                 const data = JSON.parse(msg.content);
-//                 callback(data.message);
-//                 this.channel.ack(msg);
-//             });
+//                 if (msg !== null) {
+//                     const data = JSON.parse(msg.content);
+//                     messages.push({ message: data.message, msgObj: msg });
+
+//                     if (messages.length >= BATCH_SIZE) {
+//                         processBatch(messages, callback, channel);
+//                         messages = [];
+//                     }
+//                 }
+//             }, { noAck: false });
+
+//             setInterval(() => {
+//                 if (messages.length > 0) {
+//                     processBatch(messages, callback, channel);
+//                     messages = [];
+//                 }
+//             }, 1000);
 //         } catch (err1) {
 //             console.error('Error consuming message:', err1);
 //         }
 //     }
+// }
+
+// function processBatch(messages, callback, channel) {
+//     messages.forEach(({ message, msgObj }) => {
+//         callback(message);
+//         channel.ack(msgObj);
+//     });
 // }
 
 // module.exports = Consumer;
@@ -88,12 +101,8 @@ async function consumeMsg(callback) {
                 messages = [];
             }
         }
-        // const data = JSON.parse(msg.content);
-        // callback(data.message);
-        // channel.ack(msg);
     }, { noAck: false });
 
-    // interval
     setInterval(() => {
         if (messages.length > 0) {
             processBatch(messages, callback, channel);

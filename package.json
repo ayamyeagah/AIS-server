@@ -7,7 +7,7 @@
     "test": "jest",
     "start": "node app.js",
     "dev": "nodemon app.js",
-    "service": "node ./services/services.js"
+    "service": "node ./services/amqp/services.js"
   },
   "repository": {
     "type": "git",
