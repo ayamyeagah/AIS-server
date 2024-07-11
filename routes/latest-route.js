@@ -1,10 +1,10 @@
 /* routes for latest data
 */
 
-const getLatest = require('../controllers/latest-controller');
+const getRecents = require('../controllers/recents-controller');
 const express = require('express');
 const router = express.Router();
 
-router.get('/live', getLatest);
+router.get('/live', getRecents);
 
 module.exports = router;
