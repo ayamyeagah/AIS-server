@@ -1,7 +1,3 @@
-/* create view / schema for main purpose.
-collection for test
-*/
-
 const config = require('../config/config')
 const mongoose = require('mongoose');
 
@@ -41,6 +37,8 @@ const recentsSchema = new mongoose.Schema(
 
     }
 );
+
+recentsSchema.index({ location: '2dsphere' });
 
 Recents = mongoose.model(
     'recents',
