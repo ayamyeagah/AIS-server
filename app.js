@@ -1,5 +1,3 @@
-/* Main Application
-*/
 const dotenv = require('dotenv');
 const express = require('express');
 const http = require('http');
@@ -25,12 +23,41 @@ const ioServer = io(server, {
     }
 });
 
-// Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 
-// Connection
+app.use('/api', routes);
+
+app.get('/', (req, res) => {
+    res.send('AIS SERVER STARTED');
+});
+
+// 404 Handler
+app.use(function (req, res, next) {
+    const status = 404;
+    const message = 'Resource not found';
+    const errorResponse = {
+        data: [],
+        isError: true,
+        errMsg: message,
+    };
+    res.status(status).send(errorResponse);
+});
+
+// 500 Handler
+app.use((error, req, res, next) => {
+    console.error(error);
+    const status = 500;
+    const message = process.env.NODE_ENV === 'development' ? error.message : 'API Server Error';
+    const errorResponse = {
+        data: [],
+        isError: true,
+        errMsg: message,
+    };
+    res.status(status).send(errorResponse);
+});
+
 mongoose.connect(config.db.uri)
     .then(() => {
         server.listen(config.app.port, async () => {
@@ -47,9 +74,3 @@ mongoose.connect(config.db.uri)
     .catch((err) => {
         console.error('CONNECTION FAILED')
     })
-
-app.use('/api', routes);
-
-app.get('/', (req, res) => {
-    res.send('AIS SERVER STARTED');
-});
