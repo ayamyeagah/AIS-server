@@ -6,7 +6,7 @@ const saveDynamic = async (messages) => {
 
     if (dynamicData.length > 0) {
         await Dynamic.insertMany(dynamicData);
-        console.log('Saved to Dynamic');
+        // console.log('Saved to Dynamic');
         updateLatestDynamic(messages);
     }
 };

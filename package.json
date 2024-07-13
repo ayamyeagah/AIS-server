@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest",
     "start": "node app.js",
-    "dev": "nodemon app.js",
+    "dev": "set NODE_OPTIONS=--max-old-space-size=8192 && nodemon app.js",
     "service": "node ./services/amqp/services.js"
   },
   "repository": {

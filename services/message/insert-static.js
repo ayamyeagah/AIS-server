@@ -6,7 +6,7 @@ const saveStatic = async (messages) => {
 
     if (staticData.length > 0) {
         await Static.insertMany(staticData);
-        console.log('Saved to Static');
+        // console.log('Saved to Static');
         updateLatestStatic(messages);
     }
 }

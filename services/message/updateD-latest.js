@@ -23,7 +23,7 @@ const updateLatestDynamic = async (message) => {
     }));
 
     await Recents.bulkWrite(bulkOpsDynamic);
-    console.log('Updated Dynamic in Latest');
+    // console.log('Updated Dynamic in Latest');
 };
 
 module.exports = updateLatestDynamic;

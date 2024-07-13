@@ -23,7 +23,7 @@ const updateLatestStatic = async (message) => {
     }));
 
     await Recents.bulkWrite(bulkOpsStatic);
-    console.log('Updated Static in Latest');
+    // console.log('Updated Static in Latest');
 };
 
 module.exports = updateLatestStatic;
