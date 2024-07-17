@@ -6,8 +6,8 @@
   "scripts": {
     "test": "jest",
     "start": "node app.js",
-    "dev": "nodemon app.js",
-    "service": "node ./services/services.js"
+    "dev": "set NODE_OPTIONS=--max-old-space-size=8192 && nodemon app.js",
+    "service": "node ./services/amqp/services.js"
   },
   "repository": {
     "type": "git",
@@ -29,6 +29,7 @@
     "mongoose-int32": "^0.6.0",
     "net": "^1.0.2",
     "path": "^0.12.7",
+    "socket.io": "^4.7.5",
     "split": "^1.0.1"
   },
   "devDependencies": {

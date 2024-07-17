@@ -1,19 +1,14 @@
 /* class for create producer in message queueing
 */
 
-const config = require('../config/config');
+const config = require('../../config/config');
 const amqp = require('amqplib');
-
-// 1. Connect to RabbitMQ server
-// 2. Create a new channel on that connection
-// 3. Create the exchange
-// 4. Publish the message to the exchange with a routing key
 
 class Producer {
     channel;
 
     async createChannel() {
-        const conn = await amqp.connect(config.rabbitMQ.uri);
+        const conn = await amqp.connect(config.amqp.local.uri);
         this.channel = await conn.createChannel();
     }
 
@@ -22,11 +17,11 @@ class Producer {
             await this.createChannel();
         }
 
-        const exchangeName = config.rabbitMQ.exchange;
+        const exchangeName = config.amqp.local.exchange;
         await this.channel.assertExchange(exchangeName, 'direct');
 
         const msg = {
-            type: config.rabbitMQ.routingKey,
+            type: config.amqp.local.routingKey,
             message: message
         };
 
@@ -36,7 +31,7 @@ class Producer {
             Buffer.from(JSON.stringify(msg))
         );
 
-        console.log(`${message} sent to ${exchangeName}`);
+        // console.log(`${message}`);
     }
 }
 
