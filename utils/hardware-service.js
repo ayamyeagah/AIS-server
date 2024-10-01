@@ -1,2 +1,0 @@
-/* utils for handling incoming data through mqtt protocol from hardware
-*/

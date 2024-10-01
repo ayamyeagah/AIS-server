@@ -72,5 +72,5 @@ mongoose.connect(config.db.uri)
         });
     })
     .catch((err) => {
-        console.error('CONNECTION FAILED')
+        console.error('CONNECTION FAILED', err)
     })

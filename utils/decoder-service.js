@@ -1,6 +1,3 @@
-/*  utils for handling decode data from nmea format to ais messages
-*/
-
 const AisDecoder = require('ais-stream-decoder');
 
 class NMEADecoder {

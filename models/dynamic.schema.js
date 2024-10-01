@@ -1,6 +1,3 @@
-/* Schema for dynamic collection (type: 1,2,3,4,8,18) 
-*/
-
 const config = require('../config/config');
 const mongoose = require('mongoose');
 const Int32 = require('mongoose-int32').loadType(mongoose);
@@ -22,13 +19,6 @@ const dynamicSchema = new mongoose.Schema(
         rateOfTurn: Number,
         speedOverGround: Number,
         accuracy: Boolean,
-        // loc: {
-        //     type: {
-        //         type: String,
-        //         enum: ['Point']
-        //     },
-        //     coordinates: [Double]
-        // },
         lon: Number,
         lat: Number,
         courseOverGround: Number,

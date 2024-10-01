@@ -1,38 +1,28 @@
-/* utils for handling AIS data over socket connection as a client
-will be migrate to mqtt. soon.
-*/
+// const net = require('net');
+// const split = require('split');
 
-const net = require('net');
-const split = require('split');
+// function tcpDataConn(port, host, onDataReceived) {
+//     const clientSocket = new net.Socket();
 
-// Function to connect to TCP server using a socket
-function tcpDataConn(port, host, onDataReceived) {
-    const clientSocket = new net.Socket();
+//     clientSocket.connect(port, host, () => {
+//         console.log('Connected to TCP server');
+//     });
 
-    // Connect to the TCP server
-    clientSocket.connect(port, host, () => {
-        console.log('Connected to TCP server');
-    });
+//     clientSocket
+//         .pipe(split())
+//         .on('data', data => {
+//             onDataReceived(data.toString());
+//         });
 
-    // Pipe the TCP client stream through the split transform
-    clientSocket
-        .pipe(split())
-        .on('data', data => {
-            // Data received stored to onDataReceived variable
-            onDataReceived(data.toString());
-        });
+//     clientSocket.on('close', () => {
+//         console.log('Connection to TCP server closed');
+//     });
 
-    // Event handler for socket close
-    clientSocket.on('close', () => {
-        console.log('Connection to TCP server closed');
-    });
+//     clientSocket.on('error', err => {
+//         console.error('Socket error:', err);
+//     });
 
-    // Event handler for socket error
-    clientSocket.on('error', err => {
-        console.error('Socket error:', err);
-    });
+//     return clientSocket;
+// }
 
-    return clientSocket;
-}
-
-module.exports = tcpDataConn;
+// module.exports = tcpDataConn;

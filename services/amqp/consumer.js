@@ -1,6 +1,3 @@
-/* function for consuming incoming data from queue
-*/
-
 const config = require('../../config/config');
 const amqp = require('amqplib');
 

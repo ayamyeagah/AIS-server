@@ -1,6 +1,3 @@
-/* Controller for AIS message
-*/
-
 const Consumer = require('../services/amqp/consumer');
 const NMEADecoder = require('../utils/decoder-service');
 const saveMessages = require('../services/message/insert-message');

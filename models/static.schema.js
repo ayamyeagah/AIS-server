@@ -1,6 +1,3 @@
-/* Schema for static collection (type: 5 & 24)
-*/
-
 const config = require('../config/config');
 const mongoose = require('mongoose');
 const Int32 = require('mongoose-int32').loadType(mongoose);

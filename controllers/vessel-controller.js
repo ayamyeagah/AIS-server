@@ -1,17 +1,17 @@
-const Static = require('../models/static.schema');
+// const Static = require('../models/static.schema');
 const Recents = require('../models/recents.schema');
 
 const getVessels = async (req, res) => {
     try {
         // const vessels = await Static.find({}, 'mmsi imo name typeAndCargo');
-        const vessels = await Static.aggregate([
+        const vessels = await Recents.aggregate([
             {
                 $group: {
                     _id: "$mmsi",
                     mmsi: { $first: "$mmsi" },
-                    imo: { $first: "$imo" },
+                    imo: { $first: "$static.imo" },
                     name: { $first: "$name" },
-                    typeAndCargo: { $first: "$typeAndCargo" }
+                    typeAndCargo: { $first: "$type" }
                 }
             },
             {

@@ -1,17 +1,9 @@
-/* schema for stored all message received
-*/
-
 const config = require('../config/config');
 const mongoose = require('mongoose');
 const Int32 = require('mongoose-int32').loadType(mongoose);
 
 const messageSchema = new mongoose.Schema(
     {
-        // mandatory params
-        // _id: {
-        //     type: mongoose.ObjectId,
-        //     required: true
-        // },
         type: {
             type: Int32,
             required: true

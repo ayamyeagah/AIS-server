@@ -1,6 +1,3 @@
-/* Controller for latest message
-*/
-
 const Recents = require('../models/recents.schema');
 
 const getLatest = async (req, res) => {

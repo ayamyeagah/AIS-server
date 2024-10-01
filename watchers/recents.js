@@ -11,14 +11,12 @@ const watcher = async (io) => {
                 socketEvents.INSERT_RECENTS,
                 docs
             );
-            // console.log(docs);
         }
         if (event.operationType === 'update') {
             io.emit(
                 socketEvents.UPDATE_RECENTS,
                 docs
             );
-            // console.log(docs);
         }
     });
 }
